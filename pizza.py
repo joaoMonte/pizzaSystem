@@ -37,7 +37,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def my_form():
-    return render_template("pizza.html")
+    return render_template("form.html")
 
 @app.route('/', methods=['POST'])
 def my_form_post():
