@@ -25,7 +25,7 @@ def createTable():
     strHtmlTable += tableLines
     strHtmlTable += "</tbody></table>"
     print (strHtmlTable)
-    table = open('templates/table2.html', 'w')
+    table = open('templates/table.html', 'w')
     print("ola")
 
     table.write(strHtmlTable)
@@ -61,7 +61,7 @@ def my_form_post():
     sabor = request.form['sabor']
     addPerson(name, qtd, refri, sabor)
     createTable()
-    return render_template("table2.html")
+    return render_template("table.html")
 
 if __name__ == '__main__':
     app.run(host= '0.0.0.0')
