@@ -21,25 +21,32 @@ def createTable():
         sabor = dictPerson[person]['sabor']
         tableLines += createTableLine(person, qtd, refri, sabor)
 
+
     strHtmlTable += tableLines
     strHtmlTable += "</tbody></table>"
-    table = open('table.html', w)
-    table.write(strHtmlTable)
+    print (strHtmlTable)
+    table = open('templates/table2.html', 'w')
+    print("ola")
 
+    table.write(strHtmlTable)
+    table.close()
 
 def createTableLine(name, qtd, refri, sabor):
     strHtml = "<tr><td><strong>"
     strHtml += str(name)
     strHtml += "</strong></td><td>"
-    strHtml += str(15)
+    strHtml += str(qtd)
     strHtml += "</td><td>"
     strHtml += str(refri)
     strHtml += "</td><td>"
     strHtml += str(sabor)
     strHtml += "</td></tr>"
+
     return strHtml
 
+
 def addPerson(name, qtd, refri, sabor):
+    global dictPerson
     dictPerson[name] = {'qtd':qtd, 'refri':refri, 'sabor':sabor}
 
 @app.route('/pizza', methods=['GET'])
@@ -48,10 +55,13 @@ def my_form():
 
 @app.route('/pizza', methods=['POST'])
 def my_form_post():
-    print(request.form['id1'])
-    processed_text = text
-    print(text)
-    return processed_text
+    name = request.form['name']
+    qtd = request.form['qtd']
+    refri = request.form['refri']
+    sabor = request.form['sabor']
+    addPerson(name, qtd, refri, sabor)
+    createTable()
+    return render_template("table2.html")
 
 if __name__ == '__main__':
     app.run(host= '0.0.0.0')
